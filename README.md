@@ -7,7 +7,7 @@ A chrome and firefox extension to share webcams and controls.
 
 ```bash
 # clone the git repo
-$ git clone https://github.com/kryptokinght/react-extension-boilerplate.git
+$ git clone https://github.com/josh-mcfarlin/camsync.git
 
 # Install dependencies
 $ npm install
