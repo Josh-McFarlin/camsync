@@ -13,10 +13,6 @@ const videoConstraints = {
 const WebcamView = () => {
   const webcamRef = React.useRef(null);
 
-  const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
-  }, [webcamRef]);
-
   return (
     <Draggable
       axis="both"
@@ -37,9 +33,6 @@ const WebcamView = () => {
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
         />
-        <button onClick={capture} type="button">
-          Capture photo
-        </button>
       </div>
     </Draggable>
   );

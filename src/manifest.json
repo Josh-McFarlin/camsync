@@ -25,9 +25,9 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "http://myapi.com",
     "storage",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "tabs"
   ],
   "icons": {
     "128": "img/icon.png"

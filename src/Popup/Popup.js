@@ -1,50 +1,35 @@
 import React from "react";
 import "./Popup.css";
+import * as browser from "webextension-polyfill";
 
-const TechStackLogos = () => (
-  <div className="tech-logos">
-    <img
-      className="logo"
-      src="/img/react.svg"
-      alt="ReactJS logo"
-      title="ReactJS"
-    />
-    <img
-      className="logo"
-      src="/img/webpack.svg"
-      alt="Webpack logo"
-      title="Webpack"
-    />
-    <img
-      className="logo"
-      src="/img/eslint.svg"
-      alt="ESLint logo"
-      title="ESLint"
-    />
-    <img className="logo" src="/img/jest.svg" alt="Jest logo" title="Jest" />
-  </div>
-);
+const Popup = () => {
+  const [myId, setMyId] = React.useState("");
+  const [newUser, setNewUser] = React.useState("");
 
-const Popup = () => (
-  <div className="popup">
-    <p className="popup-greet">
-      Thanks for using{" "}
-      <span className="brand">Modern extension Boilerplate</span>
-    </p>
-    <p className="stack-head">Made using :</p>
-    <TechStackLogos />
-    <p className="contrib-msg">
-      We would love some of your help in making this boilerplate even better.{" "}
-      <br />
-      <a
-        href="https://www.github.com/kryptokinght/react-extension-boilerplate"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        React Extension Boilerplate
-      </a>
-    </p>
-  </div>
-);
+  React.useState(() => {
+    // eslint-disable-next-line no-undef
+    chrome.storage.sync.get(["CamSyncID"], (result) => {
+      setMyId(result.CamSyncID);
+      console.log(`Value currently is ${result}`);
+    });
+  }, []);
+
+  const addUser = () => {
+    browser.runtime.sendMessage({
+      type: "newCall",
+      peerId: newUser,
+    });
+
+    setNewUser("");
+  };
+
+  return (
+    <div className="popup">
+      <h2>My ID: {myId}</h2>
+      <input onChange={(e) => setNewUser(e.target.value)} />
+      <button onClick={addUser}>Submit</button>
+    </div>
+  );
+};
 
 export default Popup;
